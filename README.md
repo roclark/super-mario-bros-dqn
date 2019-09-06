@@ -88,6 +88,56 @@ performance of the model.
 already closed. Despite the errors being thrown, all of the functionality will
 continue as expected and these can be safely ignored.
 
+### Action spaces
+This repository allows users to specify a custom set of actions that Mario can
+use with various degrees of complexity. Choosing a simpler action space makes it
+quicker and easier for Mario to learn, but prevents him from trying more complex
+movements which can include entering pipes and making advanced jumps which might
+be required to solve some levels. If Mario appears to struggle with a particular
+level, try simplifying the action space to see if he makes further progress.
+
+Currently, the following options are supported:
+
+#### Right only
+Mario can effectively only go right. This simplifies the training process, but
+prevents Mario from trying more complex actions. The following buttons are
+supported:
+  * Nothing
+  * Right
+  * Right + A
+  * Right + B
+  * Right + A + B
+
+#### Simple movement
+In addition to moving right and running/jumping, Mario can now walk left and
+jump in place. The following buttons are supported:
+  * Nothing
+  * Right
+  * Right + A
+  * Right + B
+  * Right + A + B
+  * A
+  * Left
+
+#### Complex movement
+This action allows Mario to try nearly any of his possible actions from the
+game. This option should be chosen by default for the most realistic exploration
+of a level, but can increase the time and complexity of learning a level. This
+is the only provided action space that allows Mario to enter vertically-oriented
+pipes. The following buttons are supported:
+  * Nothing
+  * Right
+  * Right + A
+  * Right + B
+  * Right + A + B
+  * A
+  * Left
+  * Left + A
+  * Left + B
+  * Left + A + B
+  * Down
+  * Up
+
 ## Progress
 The following table shows the current progress of the model on various levels
 and the settings used to achieve the indicated performance:

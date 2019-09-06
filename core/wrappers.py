@@ -3,7 +3,6 @@ import numpy as np
 from collections import deque
 from gym import make, ObservationWrapper, wrappers, Wrapper
 from gym.spaces import Box
-from gym_super_mario_bros.actions import COMPLEX_MOVEMENT
 from nes_py.wrappers import JoypadSpace
 
 
@@ -125,11 +124,11 @@ class CustomReward(Wrapper):
         return state, reward / 10.0, done, info
         
 
-def wrap_environment(environment, monitor=False, iteration=0):
+def wrap_environment(environment, action_space, monitor=False, iteration=0):
     env = make(environment)
     if monitor:
         env = wrappers.Monitor(env, 'recording/run%s' % iteration, force=True)
-    env = JoypadSpace(env, COMPLEX_MOVEMENT)
+    env = JoypadSpace(env, action_space)
     env = MaxAndSkipEnv(env)
     if 'FIRE' in env.unwrapped.get_action_meanings():
         env = FireResetEnv(env)

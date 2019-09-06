@@ -25,10 +25,10 @@ def update_graph(model, target_model, optimizer, replay_buffer, args, device,
         optimizer.step()
 
 
-def test_new_model(model, environment, info):
+def test_new_model(model, environment, info, action_space):
     save(model.state_dict(), '%s.dat' % environment)
     print('Testing model...')
-    flag = test(environment, info.new_best_counter)
+    flag = test(environment, action_space, info.new_best_counter)
     if flag:
         copyfile('%s.dat' % environment,
                  'recording/run%s/%s.dat' % (info.new_best_counter,
@@ -36,15 +36,15 @@ def test_new_model(model, environment, info):
 
 
 def complete_episode(model, environment, info, episode_reward, episode,
-                     epsilon, stats):
+                     epsilon, stats, action_space):
     new_best = info.update_rewards(episode_reward)
     if new_best:
         print('New best average reward of %s! Saving model'
               % round(info.best_average, 3))
-        test_new_model(model, environment, info)
+        test_new_model(model, environment, info, action_space)
     elif stats['flag_get']:
         info.update_best_counter()
-        test_new_model(model, environment, info)
+        test_new_model(model, environment, info, action_space)
     print('Episode %s - Reward: %s, Best: %s, Average: %s '
           'Epsilon: %s' % (episode,
                            round(episode_reward, 3),
@@ -76,7 +76,7 @@ def run_episode(env, model, target_model, optimizer, replay_buffer, args,
                      device, info, beta)
         if done:
             complete_episode(model, args.environment, info, episode_reward,
-                             episode, epsilon, stats)
+                             episode, epsilon, stats, args.action_space)
             break
 
 
@@ -90,7 +90,7 @@ def train(env, model, target_model, optimizer, replay_buffer, args, device):
 
 def main():
     args = parse_args()
-    env = wrap_environment(args.environment)
+    env = wrap_environment(args.environment, args.action_space)
     device = set_device(args.force_cpu)
     model, target_model = initialize_models(args.environment, env, device,
                                             args.transfer)

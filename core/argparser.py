@@ -1,6 +1,10 @@
-from argparse import ArgumentParser
+from argparse import Action, ArgumentParser
+from gym_super_mario_bros.actions import (COMPLEX_MOVEMENT,
+                                          RIGHT_ONLY,
+                                          SIMPLE_MOVEMENT)
 
-from core.constants import (BATCH_SIZE,
+from core.constants import (ACTION_SPACE,
+                            BATCH_SIZE,
                             BETA_FRAMES,
                             BETA_START,
                             ENVIRONMENT,
@@ -16,8 +20,26 @@ from core.constants import (BATCH_SIZE,
 from core.helpers import Range
 
 
+ACTION_SPACE_CHOICES = {
+    'right-only': RIGHT_ONLY,
+    'simple': SIMPLE_MOVEMENT,
+    'complex': COMPLEX_MOVEMENT
+}
+
+
+class ActionSpace(Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        setattr(namespace, self.dest, self.choices.get(values, self.default))
+
+
 def parse_args():
     parser = ArgumentParser(description='')
+    parser.add_argument('--action-space', action=ActionSpace,
+                        choices=ACTION_SPACE_CHOICES, help='Specify the '
+                        'action space to use as given by gym-super-mario-bros.'
+                        ' Refer to the README for more details on the various '
+                        'choices. Default: %s' % ACTION_SPACE,
+                        default=ACTION_SPACE_CHOICES[ACTION_SPACE])
     parser.add_argument('--batch-size', type=int, help='Specify the batch '
                         'size to use when updating the replay buffer. '
                         'Default: %s' % BATCH_SIZE, default=BATCH_SIZE)

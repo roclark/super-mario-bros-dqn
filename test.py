@@ -3,9 +3,10 @@ import torch
 from core.model import CNNDQN
 from core.wrappers import wrap_environment
 
-def test(environment, iteration):
+def test(environment, action_space, iteration):
     flag = False
-    env = wrap_environment(environment, monitor=True, iteration=iteration)
+    env = wrap_environment(environment, action_space, monitor=True,
+                           iteration=iteration)
     net = CNNDQN(env.observation_space.shape, env.action_space.n)
     net.load_state_dict(torch.load('%s.dat' % environment))
 
