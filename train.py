@@ -43,6 +43,7 @@ def complete_episode(model, environment, info, episode_reward, episode,
               % round(info.best_average, 3))
         test_new_model(model, environment, info)
     elif stats['flag_get']:
+        info.update_best_counter()
         test_new_model(model, environment, info)
     print('Episode %s - Reward: %s, Best: %s, Average: %s '
           'Epsilon: %s' % (episode,

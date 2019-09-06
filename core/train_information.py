@@ -29,6 +29,9 @@ class TrainInformation:
     def new_best_counter(self):
         return self._new_best_counter
 
+    def update_best_counter(self):
+        self._new_best_counter += 1
+
     def _update_best_reward(self, episode_reward):
         if episode_reward > self.best_reward:
             self._best_reward = episode_reward
@@ -46,7 +49,7 @@ class TrainInformation:
         x = self._update_best_reward(episode_reward)
         y = self._update_best_average()
         if x or y:
-            self._new_best_counter += 1
+            self.update_best_counter()
         return x or y
 
     def update_index(self):
