@@ -142,10 +142,13 @@ pipes. The following buttons are supported:
 The following table shows the current progress of the model on various levels
 and the settings used to achieve the indicated performance:
 
-| Level           | Version | Status  | Actions | GIF         |
-|:----------------|:--------|:--------|:--------|:------------|
-| **World 1-1**   | v0      | Optimal | Complex | ![][1-1]    |
-| **World 1-2**   | v0      | Optimal | Simple  | ![][1-2]    |
+| Level           | Version | Status   | Actions | GIF         |
+|:----------------|:--------|:---------|:--------|:------------|
+| **World 1-1**   | v0      | Optimal  | Complex | ![][1-1]    |
+| **World 1-2**   | v0      | Optimal  | Simple  | ![][1-2]    |
+| **World 1-3**   | N/A     | Untested | N/A     | N/A         |
+| **World 1-4**   | v0      | Optimal  | Simple  | ![][1-4]    |
 
 [1-1]: media/smb-1-1-complete.gif
 [1-2]: media/smb-1-2-complete.gif
+[1-4]: media/smb-1-4-complete.gif
