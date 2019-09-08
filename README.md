@@ -145,7 +145,7 @@ and the settings used to achieve the indicated performance:
 | Level           | Version | Status  | Actions | GIF         |
 |:----------------|:--------|:--------|:--------|:------------|
 | **World 1-1**   | v0      | Optimal | Complex | ![][1-1]    |
-| **World 1-2**   | v0      | Finish  | Simple  | ![][1-2]    |
+| **World 1-2**   | v0      | Optimal | Simple  | ![][1-2]    |
 
 [1-1]: media/smb-1-1-complete.gif
 [1-2]: media/smb-1-2-complete.gif
