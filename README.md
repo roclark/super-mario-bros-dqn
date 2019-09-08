@@ -152,3 +152,39 @@ and the settings used to achieve the indicated performance:
 [1-1]: media/smb-1-1-complete.gif
 [1-2]: media/smb-1-2-complete.gif
 [1-4]: media/smb-1-4-complete.gif
+
+### Legend
+The following is a legend of values to decipher the table above.
+
+#### Level
+The level as displayed in the actual game. **World 1-1** referes to World 1,
+level 1 of Super Mario Bros. (ie. the first level).
+
+#### Version
+The version of the environment that was tested. See the Environments section of
+[gym-super-mario-bros' README](https://github.com/Kautenja/gym-super-mario-bros/blob/master/README.md#environments)
+for examples of the various environment versions.
+
+#### Status
+The current status of training for the indicated level. The status can take on
+the following values:
+  * **Untested**: No attempts or progress has been made on training for the
+given level yet.
+  * **Training**: Training has begun for the indicated level, but Mario has not
+yet completed the level. If a model is provided, it will correspond to the most
+recent training pass achieved, and not necessarily the best run so far.
+  * **Satisfactory**: Mario can successfully complete the level, but is
+currently unable to do so in an optimal manner for any reason, including
+standing in place, losing health, not making forward progress, or others.
+  * **Optimal**: Mario has trained enough that he can beat the level at
+near-optimal performance. This does not necessarily mean the run is perfect, but
+he can complete the level with only a couple minor interruptions at most. In
+this state, further progress will likely not be made.
+
+#### Actions
+The action-space that Mario has been trained to use. See "Action spaces" above
+for more details on the various action spaces.
+
+#### GIF
+An animated GIF of the run that corresponds to the saved model provided in the
+repository.
