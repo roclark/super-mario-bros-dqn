@@ -1,7 +1,9 @@
 import math
 import numpy as np
 import torch
+from .constants import PRETRAINED_MODELS
 from .model import CNNDQN
+from os.path import join
 from torch import FloatTensor, LongTensor
 from torch.autograd import Variable
 
@@ -65,7 +67,7 @@ def set_device(force_cpu):
 
 
 def load_model(environment, model, target_model):
-    model_name = '%s.dat' % environment
+    model_name = join(PRETRAINED_MODELS, '%s.dat' % environment)
     model.load_state_dict(torch.load(model_name))
     target_model.load_state_dict(model.state_dict())
     return model, target_model

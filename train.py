@@ -1,4 +1,5 @@
 from core.argparser import parse_args
+from core.constants import PRETRAINED_MODELS
 from core.helpers import (compute_td_loss,
                           initialize_models,
                           set_device,
@@ -7,6 +8,7 @@ from core.helpers import (compute_td_loss,
 from core.replay_buffer import PrioritizedBuffer
 from core.train_information import TrainInformation
 from core.wrappers import wrap_environment
+from os.path import join
 from shutil import copyfile, move
 from test import test
 
@@ -26,11 +28,11 @@ def update_graph(model, target_model, optimizer, replay_buffer, args, device,
 
 
 def test_new_model(model, environment, info, action_space):
-    save(model.state_dict(), '%s.dat' % environment)
+    save(model.state_dict(), join(PRETRAINED_MODELS, '%s.dat' % environment))
     print('Testing model...')
     flag = test(environment, action_space, info.new_best_counter)
     if flag:
-        copyfile('%s.dat' % environment,
+        copyfile(join(PRETRAINED_MODELS, '%s.dat' % environment),
                  'recording/run%s/%s.dat' % (info.new_best_counter,
                                              environment))
 
