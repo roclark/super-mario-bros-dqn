@@ -5,7 +5,44 @@ model.
 
 ## Setting up the repository
 
+### Docker Container
+The easiest way to use the code in this repository is via a Docker container as
+all of the required dependencies are already installed and configured. To build
+an image, first ensure that Docker is installed, then run the following:
+
+```bash
+docker build -t roclark/super-mario-bros-dqn .
+```
+
+This will build an image using the local `Dockerfile`. Once complete, simply run
+a container based on the new image using the following:
+
+```
+docker run --rm --ipc=host \
+    -v $(pwd)/recording:/workspace/super-mario-bros-dqn/recording \
+    -v $(pwd)/pretrained_models:/workspace/super-mario-bros-dqn/pretrained_models \
+    roclark/super-mario-bros-dqn
+```
+
+This will start a training run with the default settings and save the latest
+model to `$(pwd)/pretrained_models` and a recording of all tested runs to
+`$(pwd)/recording`.
+
+The default settings can be specified by command-line arguments. To view a list
+of options, run the following (notice the `--help` at the end):
+
+```
+docker run --rm --ipc=host \
+    -v $(pwd)/recording:/workspace/super-mario-bros-dqn/recording \
+    -v $(pwd)/pretrained_models:/workspace/super-mario-bros-dqn/pretrained_models \
+    roclark/super-mario-bros-dqn --help
+```
+
 ### Creating a virtual environment
+If you chose to configure the code to run on bare-metal, follow the steps below.
+Otherwise, it is highly recommended to use the Docker container following the
+steps above, in which case this section can be skipped.
+
 After cloning the repository, it is highly recommended to install a virtual
 environment (such as `virtualenv`) or Anaconda to isolate the dependencies of
 this project with other system dependencies.
