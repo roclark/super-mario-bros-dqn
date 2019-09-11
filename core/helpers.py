@@ -66,9 +66,9 @@ def set_device(force_cpu):
     return device
 
 
-def load_model(environment, model, target_model):
+def load_model(environment, model, target_model, device):
     model_name = join(PRETRAINED_MODELS, '%s.dat' % environment)
-    model.load_state_dict(torch.load(model_name))
+    model.load_state_dict(torch.load(model_name, map_location=device))
     target_model.load_state_dict(model.state_dict())
     return model, target_model
 
@@ -79,5 +79,6 @@ def initialize_models(environment, env, device, transfer):
     target_model = CNNDQN(env.observation_space.shape,
                           env.action_space.n).to(device)
     if transfer:
-        model, target_model = load_model(environment, model, target_model)
+        model, target_model = load_model(environment, model, target_model,
+                                         device)
     return model, target_model
