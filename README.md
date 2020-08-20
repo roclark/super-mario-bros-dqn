@@ -46,7 +46,7 @@ While the virtual environment is active, install the required dependencies by
 running
 
 ```
-pip -r requirements.txt
+pip install -r requirements.txt
 ```
 
 This will install all of the dependencies at specific versions to ensure they
